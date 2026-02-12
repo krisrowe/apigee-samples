@@ -12,6 +12,11 @@ This sample demonstrates how to integrate `apigeelint` and the Apigee Deployment
 - `src/main/apigee/apiproxy`: Contains the Apigee API Proxy bundle (Weather API sample).
 - `pom.xml`: Configures the build and deployment lifecycle.
 
+## Prerequisites
+- **Apache Maven:** Required to run the build. Install via Homebrew: `brew install maven`
+- **Google Cloud SDK (gcloud):** Required for the deployment workflow to generate an access token.
+- **Node.js:** *Not required* globally. The build will download and manage its own local Node.js environment.
+
 ## Usage
 
 ### 1. Run Linting (Local only)

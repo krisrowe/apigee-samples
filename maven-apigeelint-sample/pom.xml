@@ -106,6 +106,14 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <org>${apigee.org}</org>
+                            <env>${apigee.env}</env>
+                            <bearer>${apigee.bearer}</bearer>
+                            <options>${apigee.options}</options>
+                            <hostURL>${apigee.hosturl}</hostURL>
+                            <apiVersion>${apigee.apiversion}</apiVersion>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
