@@ -1,0 +1,5 @@
+<TargetEndpoint name="backend">
+  <HTTPTargetConnection>
+    <URL>https://api.weather.gov/stations</URL>
+  </HTTPTargetConnection>
+</TargetEndpoint>

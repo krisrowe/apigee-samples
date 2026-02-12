@@ -1,0 +1,13 @@
+<ProxyEndpoint name="default">
+  <PreFlow>
+    <Response>
+      <Step><Name>AM-SetResponse</Name></Step>
+    </Response>
+  </PreFlow>
+  <HTTPProxyConnection>
+    <BasePath>/weather/v3/stations</BasePath>
+  </HTTPProxyConnection>
+  <RouteRule name="backend">
+    <TargetEndpoint>backend</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>

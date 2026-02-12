@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="weather-api">
+    <ConfigurationVersion>
+        <MajorVersion>4</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+    </ConfigurationVersion>
+    <CreatedAt>1706649719000</CreatedAt>
+    <Description>Weather API Proxy</Description>
+    <DisplayName>weather-api</DisplayName>
+    <LastModifiedAt>1706649719000</LastModifiedAt>
+    <Policies>
+        <Policy>AM-SetResponse</Policy>
+        <Policy>VerifyMyAPIKey</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>backend</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

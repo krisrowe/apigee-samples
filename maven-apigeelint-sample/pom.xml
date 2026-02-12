@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.apigee.samples</groupId>
+    <artifactId>maven-apigeelint-sample</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <node.version>v20.10.0</node.version>
+        <npm.version>10.2.3</npm.version>
+        <apigee.profile>apigeex</apigee.profile>
+        <apigee.hosturl>https://apigee.googleapis.com</apigee.hosturl>
+        <apigee.apiversion>v1</apigee.apiversion>
+        <apigee.options>update</apigee.options>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- 1. Manage Node/NPM locally for apigeelint -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.0</version>
+                <executions>
+                    <execution>
+                        <id>install-node-and-npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-install-apigeelint</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <arguments>install apigeelint</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 2. Execute apigeelint against the proxy bundle during test phase -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>apigeelint</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>node/node</executable>
+                            <arguments>
+                                <argument>node_modules/apigeelint/cli.js</argument>
+                                <argument>-s</argument>
+                                <argument>src/main/apigee/apiproxy</argument>
+                                <argument>-f</argument>
+                                <argument>table.js</argument>
+                                <argument>--profile</argument>
+                                <argument>${apigee.profile}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>deploy</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.apigee.build-tools.enterprise.maven</groupId>
+                        <artifactId>apigee-edge-maven-plugin</artifactId>
+                        <version>2.3.5</version>
+                        <executions>
+                            <execution>
+                                <id>configure-bundle</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>configure</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>deploy-bundle</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
