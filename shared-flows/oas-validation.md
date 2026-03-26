@@ -11,7 +11,7 @@ graph LR
     end
 
     subgraph "Common Services Repo"
-        SF[Shared Flow<br/>OASValidation Policy<br/>oas://{oas.spec.name}]
+        SF["Shared Flow<br/>OASValidation Policy<br/>oas://#123;oas.spec.name#125;"]
     end
 
     subgraph "Apigee X Environment"
@@ -441,7 +441,7 @@ flowchart TB
 
     subgraph apigee["Apigee X Environment"]
         ENV[(Environment-Level Resources<br/>orders-spec.yaml<br/>payments-spec.yaml<br/>catalog-spec.yaml)]
-        SFD["Shared Flow<br/>OASValidation<br/>oas://{oas.spec.name}"]
+        SFD["Shared Flow<br/>OASValidation<br/>oas://#123;oas.spec.name#125;"]
         OP["Orders Proxy"] -->|"FlowCallout<br/>spec=orders-spec.yaml"| SFD
         PP["Payments Proxy"] -->|"FlowCallout<br/>spec=payments-spec.yaml"| SFD
         CP["Catalog Proxy"] -->|"FlowCallout<br/>spec=catalog-spec.yaml"| SFD
